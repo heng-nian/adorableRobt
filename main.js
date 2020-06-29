@@ -1,7 +1,5 @@
 const vm = require("vm")
 
-const ws = require("nodejs-websocket");
-
 const core = require("./core");
 const config = require("./core/config");
 const conn = core();
