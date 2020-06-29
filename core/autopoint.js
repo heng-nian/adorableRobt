@@ -8,5 +8,8 @@ module.exports = {
     } else if (this.autoJson.user_id) {
       return this.sendPrivateMsg(this.autoJson.user_id, msg, auto);
     }
+  },
+  printAt(msg, auto = false) {
+    return this.print(`[CQ:at,qq=${this.autoJson.user_id}]${msg}`, auto);
   }
 }

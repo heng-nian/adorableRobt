@@ -24,5 +24,8 @@ module.exports = {
   },
   CQextract(auto) {
     return this.CQinfo(this.CQArr(auto))
+  },
+  CQextractAUTO(auto, is) {
+    return this.CQinfo(this.CQArr(auto)).filter(({ CQ }) => CQ == is);
   }
 }
