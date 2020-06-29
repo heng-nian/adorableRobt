@@ -1,0 +1,16 @@
+{
+  "name": "newmw",
+  "version": "0.0.1",
+  "description": "可爱萌物",
+  "main": "main.js",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.2",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
