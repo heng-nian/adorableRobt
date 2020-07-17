@@ -1,7 +1,7 @@
 const vm = require("vm")
 
-const core = require("./core");
-const config = require("./core/config");
+const core = require("./adorable");
+const config = require("./adorable/config");
 const conn = core();
 conn.on("error", (err) => {
   console.log(err);
@@ -46,11 +46,9 @@ let groupBan = (json) => {
     }
   }
 };
-const immortality = require("./修仙/Immortality")
-conn.eventRobot.on('private', jsEval);
-conn.eventRobot.on('group', json => {
+conn.on('private', jsEval);
+conn.on('group', json => {
   jsEval(json); groupBan(json);
-  // immortality(json, conn);
 });
 
 

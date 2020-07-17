@@ -9,7 +9,7 @@ module.exports = {
       return this.sendPrivateMsg(this.autoJson.user_id, msg, auto);
     }
   },
-  printAt(msg, auto = false) {
-    return this.print(`[CQ:at,qq=${this.autoJson.user_id}]${msg}`, auto);
+  printAt(msg, AT = this.autoJson.user_id) {
+    return this.print(`[CQ:at,qq=${AT}]${msg}`, false);
   }
 }
