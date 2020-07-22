@@ -19,6 +19,7 @@ let jsEval = (json) => {
       let logs = '';
       let log = vm.runInNewContext(msg, {
         print: (str, auto = false) => { conn.print(str, auto) },
+        printAt: (str, auto) => { conn.printAt(str, auto) },
         log: (msg) => {
           if (typeof msg !== 'string') { msg = JSON.stringify(msg); }
           if (logs.length == 0) { logs += msg; return msg; }
