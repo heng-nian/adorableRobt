@@ -38,7 +38,6 @@ let groupBan = (json) => {
     if (json.sender.role == 'owner' || json.sender.role == 'admin' || config.open == null || config.open[json.user_id]) {
       let num = json.message.match(/ [0-9]+/) == null ? 1 : json.message.match(/ [0-9]+/)[0]
       num = parseInt(num);
-      console.log(conn.analysis);
       let CQs = conn.analysis.CQextract(json.message);
       CQs.forEach(({ CQ, value }) => {
         if (CQ == 'at') conn.setGroupBan(json.group_id, value.qq, num);
@@ -48,8 +47,16 @@ let groupBan = (json) => {
 };
 conn.on('private', jsEval);
 conn.on('group', json => {
-  jsEval(json); groupBan(json);
+  jsEval(json);
+  groupBan(json);
 });
+conn.on('groupDecrease', json => {
+  console.log('groupDecrease', json);
+});
+conn.on('groupIncrease', json => {
+  console.log('groupIncrease', json);
+});
+
 
 
 

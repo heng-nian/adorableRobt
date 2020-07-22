@@ -26,6 +26,12 @@ module.exports = function (connect = `ws://${config.host}:${config.port}`, auto 
     if (json.meta_event_type == 'heartbeat') {
       conn.emit("heartbeat", json);
     }
+    if (json.post_type == 'notice' && json.notice_type == 'group_decrease') {
+      conn.emit("groupDecrease", json);
+    }
+    if (json.post_type == 'notice' && json.notice_type == 'group_increase') {
+      conn.emit("groupIncrease", json);
+    }
     // console.log(json);
   });
   return conn;
