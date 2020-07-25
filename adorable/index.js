@@ -1,10 +1,16 @@
+const fs = require("fs");
+
 const ws = require("nodejs-websocket");
 
 const method = require("./method");
 const autopoint = require("./autopoint");
 const analysis = require("./analysis");
-const config = require("./config");
-module.exports = function (connect = `ws://${config.host}:${config.port}`, auto = null, callback = () => { }) {
+
+const config = JSON.parse(fs.readFileSync("./adorable/config.json").toString());
+// fs.writeFileSync()
+// console.log(config);
+const update = require("./update");
+function connect(connect = `ws://${config.host}:${config.port}`, auto = null, callback = () => { }) {
   const conn = ws.connect(connect, auto, () => {
     conn.getLoginInfo().then(({ data }) => config.user = data);//new user info {name,qq}
     callback(config.user);
@@ -35,4 +41,7 @@ module.exports = function (connect = `ws://${config.host}:${config.port}`, auto 
     // console.log(json);
   });
   return conn;
+}
+module.exports = {
+  connect,update
 }

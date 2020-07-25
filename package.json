@@ -4,6 +4,7 @@
   "description": "可爱萌物",
   "main": "main.js",
   "dependencies": {
+    "axios": "^0.19.2",
     "nodejs-websocket": "^1.7.2",
     "uuid": "^8.1.0"
   },

@@ -3,17 +3,19 @@
 ## 使用方法
 
 **下载安装酷Q air/pro 下载CQHTTP插件使用并配置ws**
+##### CQHTTP下载地址 
+https://cqp.cc/t/30748
 ### **安装node.js环境 打开命令行窗口 cd进程序目录 输入**
 ```npm install ```
 ### **然后启动程序**
-```node main```
+```node main```<br/>
 adorable这是我写的一个非常简单易用的机器人框架
 ## 关于代码
 简单的包装了一下代码，以后我自己需要用到机器人相关的只需要把里面的adorable文件夹拿出来当作一个npm模块使用就好了
 ### 关于方法的使用
 ```javascript
 const adorable = require("./adorable");
-const conn = adorable(`ws://127.0.0.1:6700`);
+const conn = adorable.connect(`ws://127.0.0.1:6700`);
 conn.on("error", (err) => {
   console.log(err);
 })

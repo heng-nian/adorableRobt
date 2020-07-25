@@ -1,37 +1,18 @@
 const vm = require("vm")
+const fs = require("fs")
 
 const core = require("./adorable");
-const config = require("./adorable/config");
-const conn = core();
+// const config = require("./adorable/config");
+const config = JSON.parse(fs.readFileSync("./adorable/config.json").toString());
+const conn = core.connect();
 conn.on("error", (err) => {
-  console.log(err);
+  // console.log(err);
 })
+let js_ = true
 let jsEval = (json) => {
   // console.log(json);
-  if (json.message.substr(0, 3) == "js:") {
-    if (config.open != null) { if (!config.open[json.user_id]) return; }
-    try {
-      let msg = json.message.substr(3)
-      msg = msg.replace(/&#91;/g, '[');
-      msg = msg.replace(/&#93;/g, ']');
-      msg = msg.replace(/&amp;/g, '&');
-      msg = msg.replace(/&#44;/g, ',');
-      let logs = '';
-      let log = vm.runInNewContext(msg, {
-        print: (str, auto = false) => { conn.print(str, auto) },
-        printAt: (str, auto) => { conn.printAt(str, auto) },
-        log: (msg) => {
-          if (typeof msg !== 'string') { msg = JSON.stringify(msg); }
-          if (logs.length == 0) { logs += msg; return msg; }
-          logs += '\n' + msg;
-          return msg;
-        }
-      }, { timeout: 4 });
-      conn.print(logs);
-      // eval(msg);
-    } catch (error) {
-      conn.print([error.name, '\n', error.message].join(""));
-    }
+  if (json.message.substr(0, 1) == "说") {
+    conn.print(json.message.substr(1))
   }
 }
 let groupBan = (json) => {
@@ -50,6 +31,7 @@ conn.on('private', jsEval);
 conn.on('group', json => {
   jsEval(json);
   groupBan(json);
+  if (json.message == "复读机") { conn.print("复读机") }
 });
 conn.on('groupDecrease', json => {
   console.log('groupDecrease', json);
@@ -58,8 +40,5 @@ conn.on('groupIncrease', json => {
   console.log('groupIncrease', json);
 });
 
-
-
-
-
+// core.update('heng-nian', 'adorableRobt');
 //[CQ:at,qq=]
